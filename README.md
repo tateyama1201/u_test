@@ -21,7 +21,7 @@ cd u_test
  bin/rails c
 ```
 
-ユーザー作成
+ユーザー作成(このユーザーでログインが可能)
 ```
 User.create(name: #{任意の名前}, email: #{任意のemail}, password: #{任意のpassword})
 ```
