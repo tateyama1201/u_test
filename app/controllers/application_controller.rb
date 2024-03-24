@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  # 実際は環境変数で管理
+  CLIENT_ID = 'AXPXYGGCR4TjDxxJzayo68ejjBNEesooTDowF01X4Lw'
+  CLIENT_SECRET = 'rfFhhyzhyers4N_ZMxQN4cy3pmjzvMChEwazCcqaIzc'
+  DOMAIN = 'unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com'
+  AUTHORIZE_URL = '/oauth/authorize'
+  TOKEN_URL = '/oauth/token'
 
   private
     def logged_in_user
