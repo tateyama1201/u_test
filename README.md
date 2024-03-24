@@ -1,24 +1,30 @@
 # README
+## 起動の仕方
+### サーバー起動まで
+ローカルにclone
+```
+git clone　https://github.com/tateyama1201/u_test.git
+```
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+cd u_test
+```
+サーバー起動
+```
+ bin/rails server
+```
 
-Things you may want to cover:
+###　ユーザー作成
+コンソール起動
+```
+ bin/rails c
+```
 
-* Ruby version
+ユーザー作成
+```
+User.create(name: #{任意の名前}, email: #{任意のemail}, password: #{任意のpassword})
+```
 
-* System dependencies
+## 備考
+テストがなく、エラーハンドリングがほぼありません。時間切れでした。よろしくお願いします。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
