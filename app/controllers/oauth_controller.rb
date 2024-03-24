@@ -3,7 +3,7 @@ require "json"
 require 'uri'
 
 class OauthController < ApplicationController
-
+  TOKEN_URL = '/oauth/token'
   def callback
     ## codeが返ってきているようならアクセストークンリクエストをする
     if params[:code].present?

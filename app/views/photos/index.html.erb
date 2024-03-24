@@ -5,6 +5,8 @@
       <%= photo.title %>
       <%=image_tag photo.image %>
       <br>
+      <%= button_to "ツイートする", {controller: "photos", action: "tweet", id:  photo.id }, data: {title: photo.title, url: url_for(photo.image) }%>
+      <br>
     <% end %>
   <% end %>
 <% end %>

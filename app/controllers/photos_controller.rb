@@ -1,6 +1,11 @@
 require 'uri'
+require "net/http"
+require "json"
+
 class PhotosController < ApplicationController
   before_action :logged_in_user
+  AUTHORIZE_URL = '/oauth/authorize'
+  TWEETS_URL = '/api/tweets'
 
   def index
   @photos = @current_user.photos&.sort&.reverse
@@ -29,6 +34,23 @@ class PhotosController < ApplicationController
     end
   end
 
+  def tweet
+    photo = Photo.find( params[:id])
+    return unless photo.present?
+
+    res = post_tweet_req(photo)
+
+    # 失敗した時用にログ出力
+    if ['201','200'].exclude?(res.code) && res.body.present?
+      puts JSON.parse(res.body)
+      flash[:danger] = 'ツイートに失敗しました'
+    else
+      flash[:notice] = 'ツイートが完了しました!'
+    end
+
+    redirect_to photos_path
+  end
+
   private
 
   def my_tweet_app_url
@@ -42,5 +64,23 @@ class PhotosController < ApplicationController
 
     uri.query = request_params.to_param
     uri.to_s
+  end
+
+  def post_tweet_req(photo)
+    uri = URI.parse("http://#{DOMAIN}#{TWEETS_URL}")
+    request_params = {
+      "text": photo.title,
+      "url":  "http://localhost:3000#{rails_storage_proxy_path(photo.image)}",
+    }
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = uri.scheme === "https"
+
+    req = Net::HTTP::Post.new(uri.path)
+    req["Authorization"] = "bearer #{session['access_token']}"
+    req["Content-Type"] = "application/json"
+    req.set_form_data(request_params)
+   
+    res = http.request(req)
   end
 end

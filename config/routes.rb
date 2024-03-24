@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: 'photos#index'
-  resources :photos, only: [:index, :new, :create]
+  resources :photos, only: [:index, :new, :create] do
+    collection do
+      post :tweet
+    end
+  end
 
   # login
   get    'login'   => 'sessions#new'
