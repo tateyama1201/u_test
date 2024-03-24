@@ -13,16 +13,13 @@ module SessionsHelper
     end
   end
 
-  def current_user?(user)
-    user == current_user
-  end
-
   def logged_in?
     !current_user.nil?
   end
 
   def log_out
     session.delete(:user_id)
+    session.delete(:access_token)
     @current_user = nil
   end
 end

@@ -30,7 +30,7 @@ class PhotosController < ApplicationController
       redirect_to '/photos'
     else
       flash[:danger] = @photo.errors.full_messages
-      render('photos/new')
+      render 'photos/new', status: :unprocessable_entity
     end
   end
 

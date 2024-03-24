@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to root_url
     else
-      flash[:danger] = create_error_message(user, params[:session])
-      render 'new'
+      flash.now[:danger] = create_error_message(user, params[:session])
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -22,9 +22,9 @@ class SessionsController < ApplicationController
 
   def create_error_message(user, session)
     if params[:session][:email].blank? || params[:session][:password].blank?
-        'ユーザーID,もしくはパスワードが未入力です'
-      else
-        'ユーザーIDとパスワードが一致するユーザーが存在しない' 
+      'ユーザーID,もしくはパスワードが未入力です'
+    else
+      'ユーザーIDとパスワードが一致するユーザーが存在しないです' 
     end
   end
 end
