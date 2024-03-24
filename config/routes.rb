@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'photos#index'
-  get 'photos/index'
-  get 'top/index'
+  resources :photos, only: [:index, :new, :create]
+
   # login
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

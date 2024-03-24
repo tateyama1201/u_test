@@ -1,0 +1,14 @@
+<%=form_with(model: @photo, url: photos_path, local: true) do |f| %>
+  <h1>投稿する</h1>
+  <%= f.label '写真タイトル' %>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.label '画像アップロード' %>
+  <%= f.file_field :image %>
+  <br>
+  <input type="submit" value="投稿">
+<% end %>
+<br>
+<%= link_to "キャンセル", photos_path %>
+<br>
+<%= link_to "ログアウト", logout_path %>
