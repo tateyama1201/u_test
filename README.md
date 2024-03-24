@@ -14,7 +14,8 @@ cd u_test
  bin/rails server
 ```
 
-###　ユーザー作成
+### ユーザー作成
+
 コンソール起動
 ```
  bin/rails c
